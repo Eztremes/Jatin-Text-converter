@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-export default function About({mode}) {
+import Navbar from "./Navbar";
+export default function About({mode,handleMode}) {
   // Dark mode
   const [myStyle, setMyStyle] = useState({
     color: "black",
@@ -23,6 +24,13 @@ useEffect(()=>{
   }
 },[mode])
   return (
+    <>
+    <Navbar
+          title="TextSurface"
+          aboutText="About"
+          mode={mode}
+          handleMode={handleMode}
+        />
     <div className="container">
       <h1>About Us</h1>
       <div className="accordion mb-3" id="accordionExample">
@@ -105,5 +113,6 @@ useEffect(()=>{
       </div>
 
     </div>
+    </>
   );
 }

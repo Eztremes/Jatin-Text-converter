@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Navbar from "./Navbar";
 
-export default function Textform(props) {
+export default function Textform({mode,handleMode},props) {
   // Or listen how u write code your code is dirty anywhere usestate, anyvariable not any blocks you are using u are typing anywhere brother
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
@@ -73,12 +74,18 @@ export default function Textform(props) {
     fontWeight: isBold ? "bold" : "normal",
     fontStyle: isItalic ? "italic" : "normal",
     textDecoration: isUnderline ? "underline" : "none",
-    backgroundColor: props.mode === "dark" ? "grey" : "white",
-    color: props.mode === "dark" ? "white" : "black",
+    backgroundColor: mode === "dark" ? "grey" : "white",
+    color: mode === "dark" ? "white" : "black",
   };
 
   return (
     <>
+    <Navbar
+          title="TextSurface"
+          aboutText="About"
+          mode={mode}
+          handleMode={handleMode}
+        />
       <h1 style={{ color: props.mode === "dark" ? "white" : "blue" }}>{props.heading}</h1>
       <div className="mb-3" id="mybox">
         <textarea
