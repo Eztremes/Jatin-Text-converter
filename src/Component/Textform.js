@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
+import React, { useState,useEffect } from "react";
+import axios from 'axios';
 
-export default function Textform({mode,handleMode},props) {
+export default function Textform(props) {
   // Or listen how u write code your code is dirty anywhere usestate, anyvariable not any blocks you are using u are typing anywhere brother
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
@@ -42,22 +42,54 @@ export default function Textform({mode,handleMode},props) {
   };
 
   async function handleTranslateClick() {
-    const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://libretranslate.de/translate"), {
-      method: "POST",
-      body: JSON.stringify({
-        q: text,
-        source: "en",
-        target: targetLang,
-        format: "text",
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await response.json();
-    setTranslatedText(data.translatedText);
+    
+
+const options = {
+  method: 'POST',
+  url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',
+  headers: {
+    'x-rapidapi-key': 'e175641489msh0b6f47b19c2f02dp153705jsn3de64e4f0bcd',
+    'x-rapidapi-host': 'deep-translate1.p.rapidapi.com',
+    'Content-Type': 'application/json'
+  },
+  data: {
+    q: text,
+    source: 'en',
+    target: targetLang
+  }
+};
+
+try {
+	const response = await axios.request(options);
+	setText(response?.data?.data?.translations?.translatedText);
+} catch (error) {
+	console.error(error);
+}
   }
   
-  
-  
+  const [languages,setlanguages] = useState([])
+  const Getlanguages= async() => {
+    const options = {
+      method: 'GET',
+      url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2/languages',
+      headers: {
+        'x-rapidapi-key': 'e175641489msh0b6f47b19c2f02dp153705jsn3de64e4f0bcd',
+        'x-rapidapi-host': 'deep-translate1.p.rapidapi.com'
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+ useEffect(() => {
+   
+ Getlanguages()
+    
+ }, [])
  
   const handleBoldClick = () => setIsBold(!isBold);
   const handleItalicClick = () => setIsItalic(!isItalic);
@@ -74,18 +106,12 @@ export default function Textform({mode,handleMode},props) {
     fontWeight: isBold ? "bold" : "normal",
     fontStyle: isItalic ? "italic" : "normal",
     textDecoration: isUnderline ? "underline" : "none",
-    backgroundColor: mode === "dark" ? "grey" : "white",
-    color: mode === "dark" ? "white" : "black",
+    backgroundColor: props.mode === "dark" ? "grey" : "white",
+    color: props.mode === "dark" ? "white" : "black",
   };
 
   return (
     <>
-    <Navbar
-          title="TextSurface"
-          aboutText="About"
-          mode={mode}
-          handleMode={handleMode}
-        />
       <h1 style={{ color: props.mode === "dark" ? "white" : "blue" }}>{props.heading}</h1>
       <div className="mb-3" id="mybox">
         <textarea
@@ -116,6 +142,7 @@ export default function Textform({mode,handleMode},props) {
           <option value="de">German</option>
           <option value="zh">Chinese</option>
           <option value="hi">Hindi</option>
+          <option value="en">English</option>
         </select>
         <button onClick={handleTranslateClick} type="button" className="btn btn-primary">🌐 Translate</button>
         
@@ -125,12 +152,11 @@ export default function Textform({mode,handleMode},props) {
         <h1 style={{ color: props.mode === "dark" ? "white" : "blue" }}>Minutes Read</h1>
         <p style={{ color: props.mode === "dark" ? "white" : "black" }}>{0.008 * text.split(" ").filter((element) => element.length !== 0).length}</p>
         
-        <h1 style={{ color: props.mode === "dark" ? "white" : "blue" }}>Translation</h1>
-        <p style={{ color: props.mode === "dark" ? "white" : "black" }}>{translatedText}</p>
-        
+      
         <h1 style={{ color: props.mode === "dark" ? "white" : "blue" }}>Preview</h1>
         <p style={{ color: props.mode === "dark" ? "white" : "black" }}>{text.length > 0 ? text : "Enter something in the box above to preview it here"}</p>
       </div>
     </>
   );
 }
+
