@@ -1,11 +1,19 @@
+import Navbar from "./Component/Navbar";
 import "./App.css";
 import Textform from "./Component/Textform";
 import { useState } from "react";
 import About from "./Component/About";
-import {Route,Routes,} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  BrowserRouter,
+  Routes,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
+
   const handleMode = () => {
     if (mode === "light") {
       setMode("dark");
@@ -15,11 +23,28 @@ function App() {
       document.body.style.backgroundColor = "white";
     }
   };
+
   return (
+    <>
+     
+      <BrowserRouter>
+      <Navbar
+          title="TextSurface"
+          aboutText="About"
+          mode={mode}
+          handleMode={handleMode}
+        />
         <Routes>
-          <Route path="/" element={ <Textform handleMode={handleMode} mode={mode} />} />
-          <Route path="/about" element={<About mode={mode} handleMode={handleMode} />} />
+          <Route index element={ <Textform heading="TextConverter" mode={mode} />} />
+          <Route path="/home" element={ <Textform heading="TextConverter" mode={mode} />} />
+          <Route path="/about" element={<About mode={mode} />} />
         </Routes>
+      </BrowserRouter>
+     
+     
+      
+    </>
   );
 }
 export default App;
+
