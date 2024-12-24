@@ -25,7 +25,7 @@ useEffect(()=>{
   return (
     <div className="container">
       <h1>About Us</h1>
-      <div className="accordion mb-3" id="accordionExample">
+      <div className="accordion" id="accordionPanelsStayOpenExample">
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button
@@ -33,18 +33,17 @@ useEffect(()=>{
               className="accordion-button"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
+              data-bs-target="#panelsStayOpen-collapseOne"
               aria-expanded="true"
-              aria-controls="collapseOne"
+              aria-controls="panelsStayOpen-collapseOne"
             >
-              Accordion Item #1
+              Text Surface
             </button>
           </h2>
           <div
             style={myStyle}
-            id="collapseOne"
+            id="panelsStayOpen-collapseOne"
             className="accordion-collapse collapse show"
-            data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
              TextSurface is website that is useful in converting the text into <b>UPPERCASE</b> , <b>lowercase</b>, also helps in removing the <b>extra spaces</b> between the text with a follow up of <b>clear </b> button. A <b>Copy to clipboard</b> function is also provided so the user can copy the text or content written so far . 
@@ -58,18 +57,17 @@ useEffect(()=>{
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
+              data-bs-target="#panelsStayOpen-collapseTwo"
               aria-expanded="false"
-              aria-controls="collapseTwo"
+              aria-controls="panelsStayOpen-collapseTwo"
             >
-              Accordion Item #2
+              Text Summary
             </button>
           </h2>
           <div
             style={myStyle}
-            id="collapseTwo"
+            id="panelsStayOpen-collapseTwo"
             className="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
               Secondly we have <b>Text Summary</b> which counts how much <b>words</b> have been typed as well as the amount of <b>characters</b> used in the sentence . 
@@ -84,18 +82,17 @@ useEffect(()=>{
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
+              data-bs-target="#panelsStayOpen-collapseThree"
               aria-expanded="false"
-              aria-controls="collapseThree"
+              aria-controls="panelsStayOpen-collapseThree"
             >
-              Accordion Item #3
+              Preview
             </button>
           </h2>
           <div
             style={myStyle}
-            id="collapseThree"
+            id="panelsStayOpen-collapseThree"
             className="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
              And lastly we have the <b>Preview</b> : it basically shows us the text which is being typed into the textarea above .
