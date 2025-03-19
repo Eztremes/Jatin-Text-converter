@@ -38,6 +38,7 @@ function App() {
           <Route index element={ <Textform heading="TextConverter" mode={mode} />} />
           <Route path="/home" element={ <Textform heading="TextConverter" mode={mode} />} />
           <Route path="/about" element={<About mode={mode} />} />
+           <Route path="/Text-Converter" element={<Textform handleMode={handleMode} mode={mode} />} />
         </Routes>
       </BrowserRouter>
      
